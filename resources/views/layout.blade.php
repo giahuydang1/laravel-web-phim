@@ -29,10 +29,10 @@
      
       <link rel='dns-prefetch' href='//s.w.org' />
       
-      <link rel='stylesheet' id='bootstrap-css' href='css/bootstrap.min.css' media='all' />
-      <link rel='stylesheet' id='style-css' href='css/style.css' media='all' />
-      <link rel='stylesheet' id='wp-block-library-css' href='css/style.min.css' media='all' />
-      <script type='text/javascript' src='js/jquery.min.js?ver=5.7.2' id='halim-jquery-js'></script>
+      <link rel='stylesheet' id='bootstrap-css' href='{{asset('css/bootstrap.min.css')}}' media='all' />
+      <link rel='stylesheet' id='style-css' href='{{asset('css/style.css')}}' media='all' />
+      <link rel='stylesheet' id='wp-block-library-css' href='{{asset('css/style.min.css')}}' media='all' />
+      <script type='text/javascript' src='{{asset('js/jquery.min.js?ver=5.7.2')}}' id='halim-jquery-js'></script>
       <style type="text/css" id="wp-custom-css">
          .textwidget p a img {
          width: 100%;
@@ -97,15 +97,11 @@
                   <div class="menu-menu_1-container">
                      <ul id="menu-menu_1" class="nav navbar-nav navbar-left">
                         <li class="current-menu-item active"><a title="Trang Chủ" href="{{ route('homepage') }}">Trang Chủ</a></li>
-                        @foreach ($category as $key => $cate)
-                              <li class="mega"><a title="{{ $cate->title }}" href="{{ route('category') }}">{{ $cate->title }}</a></li>
-                        @endforeach
-                        
                         <li class="mega dropdown">
                            <a title="Thể Loại" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Thể Loại <span class="caret"></span></a>
                            <ul role="menu" class=" dropdown-menu">
                               @foreach ($genre as $key => $gen)
-                                 <li><a title="{{ $gen->title }}" href="{{ route('genre') }}">{{ $gen->title }}</a></li>
+                                 <li><a title="{{ $gen->title }}" href="{{ route('genre', $gen->slug) }}">{{ $gen->title }}</a></li>
                               @endforeach
                            </ul>
                         </li>
@@ -113,10 +109,13 @@
                            <a title="Quốc Gia" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Quốc Gia <span class="caret"></span></a>
                            <ul role="menu" class=" dropdown-menu">
                               @foreach ($country as $key => $count)
-                                 <li><a title="{{ $count->title }}" href="{{ route('country') }}">{{ $count->title }}</a></li>
+                                 <li><a title="{{ $count->title }}" href="{{ route('country', $count->slug) }}">{{ $count->title }}</a></li>
                               @endforeach
                            </ul>
                         </li>
+                        @foreach ($category as $key => $cate)
+                              <li class="mega"><a title="{{ $cate->title }}" href="{{ route('category', $cate->slug) }}">{{ $cate->title }}</a></li>
+                        @endforeach
                      </ul>
                   </div>
                   <ul class="nav navbar-nav navbar-left" style="background:#000;">
@@ -155,10 +154,10 @@
       </footer>
       <div id='easy-top'></div>
      
-      <script type='text/javascript' src='js/bootstrap.min.js?ver=5.7.2' id='bootstrap-js'></script>
-      <script type='text/javascript' src='js/owl.carousel.min.js?ver=5.7.2' id='carousel-js'></script>
+      <script type='text/javascript' src='{{asset('js/bootstrap.min.js?ver=5.7.2')}}' id='bootstrap-js'></script>
+      <script type='text/javascript' src='{{asset('js/owl.carousel.min.js?ver=5.7.2')}}' id='carousel-js'></script>
      
-      <script type='text/javascript' src='js/halimtheme-core.min.js?ver=1626273138' id='halim-init-js'></script>
+      <script type='text/javascript' src='{{asset('js/halimtheme-core.min.js?ver=1626273138')}}' id='halim-init-js'></script>
       
      
      
@@ -237,5 +236,6 @@
          span.bannermobi2 img {height: 70px;width: 300px;}
          #hide_float_right a { background: #01AEF0; padding: 5px 5px 1px 5px; color: #FFF;float: left;}
       </style>
+      
    </body>
 </html>

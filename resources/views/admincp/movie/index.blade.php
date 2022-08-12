@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <a href="{{route('movie.create')}}" class="btn btn-primary">Thêm Phim</a>
@@ -10,14 +10,21 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Tên phim</th>
+                  <th scope="col">Tags</th>
+                  <th scope="col">Thời lượng phim</th>
                   <th scope="col">Hình ảnh</th>
                   <th scope="col">Phim hot</th>
+                  <th scope="col">Định dạng</th>
+                  <th scope="col">Phụ đề</th>
                   <!-- <th scope="col">Mô tả</th> -->
                   <th scope="col">Đường dẫn</th>
                   <th scope="col">Trạng thái</th>
                   <th scope="col">Danh mục</th>
                   <th scope="col">Thể loại</th>
                   <th scope="col">Quốc gia</th>
+                  <th scope="col">Ngày tạo</th>
+                  <th scope="col">Ngày cập nhật</th>
+                  <th scope="col">Năm phim</th>
                   <th scope="col">Quản lý</th>
                 </tr>
               </thead>
@@ -26,6 +33,8 @@
                 <tr>
                   <th scope="row">{{$key}}</th>
                   <td>{{$cate->title}}</td>
+                  <td>{{$cate->tags}}</td>
+                  <td>{{$cate->thoiluong}}</td>
                   <td><img width="100" src="{{asset('uploads/movie/'.$cate->image)}}"></td>
                   <td>
                     @if($cate->phim_hot==0)
@@ -35,10 +44,23 @@
                     @endif
                   </td>
                   <td>
-                    @if($cate->phim_hot==0)
+                    @if($cate->resolution==0)
                         HD
-                    @else
+                    @elseif($cate->resolution==1)
                         SD
+                    @elseif($cate->resolution==2)
+                        HDCam
+                    @elseif($cate->resolution==3)
+                        Cam
+                    @else
+                        FullHD
+                    @endif
+                  </td>
+                  <td>
+                    @if($cate->phude==0)
+                        Phụ đề
+                    @else
+                        Thuyết minh
                     @endif
                   </td>
                   <!-- <td>{{$cate->description}}</td> -->
@@ -53,6 +75,11 @@
                   <td>{{$cate->category->title}}</td>
                   <td>{{$cate->genre->title}}</td>
                   <td>{{$cate->country->title}}</td>
+                  <td>{{$cate->ngaytao}}</td>
+                  <td>{{$cate->ngaycapnhat}}</td>
+                  <td>
+                    {!! Form::selectYear('year',2000,2022, isset($cate->year) ? $cate->year : '',['class'=>'select-year','id'=>$cate->id] ) !!}
+                  </td>
                   <td>
                       {!! Form::open(['method'=>'DELETE','route'=>['movie.destroy',$cate->id],'onsubmit'=>'return confirm("Bạn có chắc muốn xóa?")']) !!}
                         {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}

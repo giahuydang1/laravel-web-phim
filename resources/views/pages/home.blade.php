@@ -137,6 +137,6 @@
                @endforeach
             </main>
             <!--Sidebar-->
-            @include('pages.include.sidebar');
+            @include('pages.include.sidebar')
 </div>
 @endsection

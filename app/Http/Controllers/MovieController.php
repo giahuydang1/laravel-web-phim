@@ -30,6 +30,14 @@ class MovieController extends Controller
         $movie->save();
     }
 
+    public function update_season(Request $request)
+    {
+        $data = $request->all();
+        $movie = Movie::find($data['id_phim']);
+        $movie->season = $data['season'];
+        $movie->save();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

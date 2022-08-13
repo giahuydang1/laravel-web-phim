@@ -102,7 +102,23 @@
                 data:{year:year, id_phim:id_phim},
                 success:function()
                 {
-                    alert('Thay đổi năm phim theo năm'+year+' Thành công');
+                    alert('Thay đổi năm phim theo năm '+year+' Thành công');
+                }
+            });
+        })
+    </script>
+    <script>
+        $('.select-season').change(function(){
+            var season = $(this).find(':selected').val();
+            var id_phim = $(this).attr('id');
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:"{{url('/update-season-phim')}}",
+                method:"POST",
+                data:{season:season, id_phim:id_phim, _token:_token},
+                success:function()
+                {
+                    alert('Thay đổi season phim '+season+' Thành công');
                 }
             });
         })
